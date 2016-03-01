@@ -19,17 +19,20 @@ module.exports = new StateModel();
 
 },{}],3:[function(require,module,exports){
 var TodoModel = Backbone.Model.extend({
-  defaults: {
-    title: '',
-    completed: false,
-    hidden: false
-  },
-
   urlRoot: '/api/todos/',
 
-  toggle: function(completed) {
-    completed = completed || !this.get('completed');
+  defaults: function() {
+    return {
+      id: Date.now(),
+      hidden: false
+    };
+  },
 
+  toggle: function() {
+    this.setCompleted(!this.get('completed'));
+  },
+
+  setCompleted: function(completed) {
     this.set('completed', completed);
     this.save({
       completed: completed
@@ -47,7 +50,7 @@ var TodoCollection = Backbone.Collection.extend({
 
   url: '/api/todos/',
 
-  comparator: 'title',
+  comparator: 'id',
 
   completed: function () {
     return this.where({
@@ -61,8 +64,32 @@ var TodoCollection = Backbone.Collection.extend({
     });
   },
 
-  nextOrder: function () {
-    return this.length ? this.last().get('order') + 1 : 1;
+  changeFilter: function(filter) {
+    todoCollection.each(function(model) {
+      var isCompleted = model.get('completed');
+
+      switch (filter) {
+        case 'all':
+          model.set('hidden', false);
+          break;
+        case 'active':
+          model.set('hidden', isCompleted);
+          break;
+        case 'completed':
+          model.set('hidden', !isCompleted);
+          break;
+      }
+    });
+  },
+
+  toggleAll: function() {
+    var hasAllCompleted = this.every(function(model) {
+      return model.get('completed');
+    });
+
+    this.each(function(model) {
+      model.setCompleted(!hasAllCompleted);
+    });
   }
 });
 
@@ -164,8 +191,7 @@ module.exports = Backbone.View.extend({
 
   addTodo: function(title) {
     var model = new TodoModel({
-      id: Math.random(),
-      title: this.$input.val(),
+      title: title,
       completed: false
     });
     model.save();
@@ -187,7 +213,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'change', this.render);
-    this.$el.data('model-id', this.model.id);
   },
 
   toggleCompleted: function() {
@@ -195,6 +220,7 @@ module.exports = Backbone.View.extend({
   },
 
   destroy: function() {
+    this.remove();
     this.model.destroy();
   },
 
@@ -219,66 +245,26 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     this.$container = this.$('.js-container');
 
-    this.listenTo(todoCollection, 'add', this.appendOne);
-    this.listenTo(todoCollection, 'remove', this.removeOne);
-    this.listenTo(todoCollection, 'reset', this.replaceAll);
+    this.listenTo(todoCollection, 'add', this.append);
     this.listenTo(state, 'change:filter', this.changeFilter);
 
-    todoCollection.fetch({
-      reset: true
-    });
+    todoCollection.fetch();
   },
 
   toggleAll: function() {
-    var hasAllCompleted = todoCollection.every(function(model) {
-      return model.get('completed');
-    });
-
-    todoCollection.each(function(model) {
-      model.toggle(!hasAllCompleted);
-    });
+    todoCollection.toggleAll();
   },
 
   changeFilter: function() {
     var id = state.get('filter');
-
-    todoCollection.each(function(model) {
-      var isCompleted = model.get('completed');
-
-      switch (id) {
-        case 'all':
-          model.set('hidden', false);
-          break;
-        case 'active':
-          model.set('hidden', isCompleted);
-          break;
-        case 'completed':
-          model.set('hidden', !isCompleted);
-          break;
-      }
-    });
+    todoCollection.changeFilter(id);
   },
 
-  appendOne: function(todo) {
+  append: function(todo) {
     var view = new TodoView({
       model: todo
     });
     this.$container.append(view.render().el);
-  },
-
-  replaceAll: function() {
-    this.$container.empty();
-    todoCollection.each(this.appendOne, this);
-  },
-
-  removeOne: function(model) {
-    this.$container.find('li').each(function() {
-      var $todo = $(this);
-
-      if ($todo.data('model-id') === model.id) {
-        $todo.remove();
-      }
-    });
   }
 });
 

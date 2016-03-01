@@ -5,7 +5,7 @@ var TodoCollection = Backbone.Collection.extend({
 
   url: '/api/todos/',
 
-  comparator: 'title',
+  comparator: 'id',
 
   completed: function () {
     return this.where({
@@ -19,8 +19,32 @@ var TodoCollection = Backbone.Collection.extend({
     });
   },
 
-  nextOrder: function () {
-    return this.length ? this.last().get('order') + 1 : 1;
+  changeFilter: function(filter) {
+    todoCollection.each(function(model) {
+      var isCompleted = model.get('completed');
+
+      switch (filter) {
+        case 'all':
+          model.set('hidden', false);
+          break;
+        case 'active':
+          model.set('hidden', isCompleted);
+          break;
+        case 'completed':
+          model.set('hidden', !isCompleted);
+          break;
+      }
+    });
+  },
+
+  toggleAll: function() {
+    var hasAllCompleted = this.every(function(model) {
+      return model.get('completed');
+    });
+
+    this.each(function(model) {
+      model.setCompleted(!hasAllCompleted);
+    });
   }
 });
 

@@ -22,9 +22,10 @@ FakeDatabase.prototype.remove = function(id) {
 
 FakeDatabase.prototype._getHashFromCollection = function(collection) {
   var result = {};
+  var now = Date.now();
 
   collection.forEach(function(item) {
-    var id = Math.random();
+    var id = now++;
 
     item.id = id;
     result[id] = item;

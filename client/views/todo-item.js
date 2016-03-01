@@ -10,7 +10,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function() {
     this.listenTo(this.model, 'change', this.render);
-    this.$el.data('model-id', this.model.id);
   },
 
   toggleCompleted: function() {
@@ -18,6 +17,7 @@ module.exports = Backbone.View.extend({
   },
 
   destroy: function() {
+    this.remove();
     this.model.destroy();
   },
 

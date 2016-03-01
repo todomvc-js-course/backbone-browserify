@@ -19,8 +19,7 @@ module.exports = Backbone.View.extend({
 
   addTodo: function(title) {
     var model = new TodoModel({
-      id: Math.random(),
-      title: this.$input.val(),
+      title: title,
       completed: false
     });
     model.save();

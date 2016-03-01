@@ -1,15 +1,18 @@
 var TodoModel = Backbone.Model.extend({
-  defaults: {
-    title: '',
-    completed: false,
-    hidden: false
-  },
-
   urlRoot: '/api/todos/',
 
-  toggle: function(completed) {
-    completed = completed || !this.get('completed');
+  defaults: function() {
+    return {
+      id: Date.now(),
+      hidden: false
+    };
+  },
 
+  toggle: function() {
+    this.setCompleted(!this.get('completed'));
+  },
+
+  setCompleted: function(completed) {
     this.set('completed', completed);
     this.save({
       completed: completed
