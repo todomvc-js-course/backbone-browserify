@@ -1,6 +1,6 @@
-var todoCollection = require('app/models/todo-list.js');
-var state = require('app/models/state.js');
-var TodoView = require('app/views/todo-item.js');
+var todoCollection = require('models/todo-list.js');
+var state = require('models/state.js');
+var TodoView = require('views/todo-item.js');
 
 module.exports = Backbone.View.extend({
   el: '[data-view="todo-list"]',

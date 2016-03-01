@@ -1,4 +1,4 @@
-var state = require('app/models/state.js');
+var state = require('models/state.js');
 
 var AppRouter = Backbone.Router.extend({
   routes: {

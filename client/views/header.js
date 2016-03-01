@@ -1,5 +1,5 @@
-var todoCollection = require('app/models/todo-list.js');
-var TodoModel = require('app/models/todo-item.js');
+var todoCollection = require('models/todo-list.js');
+var TodoModel = require('models/todo-item.js');
 
 module.exports = Backbone.View.extend({
   el: '[data-view="header"]',

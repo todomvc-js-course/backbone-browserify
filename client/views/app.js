@@ -1,6 +1,6 @@
-var HeaderView = require('app/views/header.js');
-var FooterView = require('app/views/footer.js');
-var TodoListView = require('app/views/todo-list.js');
+var HeaderView = require('views/header.js');
+var FooterView = require('views/footer.js');
+var TodoListView = require('views/todo-list.js');
 
 var AppView = Backbone.View.extend({
   el: '[data-view="app"]',

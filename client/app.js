@@ -1,5 +1,5 @@
-var AppView = require('app/views/app.js');
-var AppRouter = require('app/router.js');
+var AppView = require('views/app.js');
+var AppRouter = require('./router.js');
 
 $(function() {
   new AppRouter();

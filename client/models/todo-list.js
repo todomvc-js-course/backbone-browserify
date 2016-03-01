@@ -1,4 +1,4 @@
-var TodoModel = require('app/models/todo-item.js')
+var TodoModel = require('models/todo-item.js')
 
 var TodoCollection = Backbone.Collection.extend({
   model: TodoModel,

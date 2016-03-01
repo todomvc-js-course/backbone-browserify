@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var AppView = require('app/views/app.js');
-var AppRouter = require('app/router.js');
+var AppView = require('views/app.js');
+var AppRouter = require('./router.js');
 
 $(function() {
   new AppRouter();
@@ -8,7 +8,7 @@ $(function() {
   Backbone.history.start();
 });
 
-},{"app/router.js":5,"app/views/app.js":6}],2:[function(require,module,exports){
+},{"./router.js":5,"views/app.js":6}],2:[function(require,module,exports){
 var StateModel = Backbone.Model.extend({
   defaults: {
     filter: 'all'
@@ -40,7 +40,7 @@ var TodoModel = Backbone.Model.extend({
 module.exports = TodoModel;
 
 },{}],4:[function(require,module,exports){
-var TodoModel = require('app/models/todo-item.js')
+var TodoModel = require('models/todo-item.js')
 
 var TodoCollection = Backbone.Collection.extend({
   model: TodoModel,
@@ -64,8 +64,8 @@ var TodoCollection = Backbone.Collection.extend({
 
 module.exports = new TodoCollection();
 
-},{"app/models/todo-item.js":3}],5:[function(require,module,exports){
-var state = require('app/models/state.js');
+},{"models/todo-item.js":3}],5:[function(require,module,exports){
+var state = require('models/state.js');
 
 var AppRouter = Backbone.Router.extend({
   routes: {
@@ -79,10 +79,10 @@ var AppRouter = Backbone.Router.extend({
 
 module.exports = AppRouter;
 
-},{"app/models/state.js":2}],6:[function(require,module,exports){
-var HeaderView = require('app/views/header.js');
-var FooterView = require('app/views/footer.js');
-var TodoListView = require('app/views/todo-list.js');
+},{"models/state.js":2}],6:[function(require,module,exports){
+var HeaderView = require('views/header.js');
+var FooterView = require('views/footer.js');
+var TodoListView = require('views/todo-list.js');
 
 var AppView = Backbone.View.extend({
   el: '[data-view="app"]',
@@ -96,9 +96,9 @@ var AppView = Backbone.View.extend({
 
 module.exports = AppView;
 
-},{"app/views/footer.js":7,"app/views/header.js":8,"app/views/todo-list.js":10}],7:[function(require,module,exports){
-var todoCollection = require('app/models/todo-list.js');
-var state = require('app/models/state.js');
+},{"views/footer.js":7,"views/header.js":8,"views/todo-list.js":10}],7:[function(require,module,exports){
+var todoCollection = require('models/todo-list.js');
+var state = require('models/state.js');
 
 module.exports = Backbone.View.extend({
   el: '[data-view="footer"]',
@@ -138,9 +138,9 @@ module.exports = Backbone.View.extend({
   }
 });
 
-},{"app/models/state.js":2,"app/models/todo-list.js":4}],8:[function(require,module,exports){
-var todoCollection = require('app/models/todo-list.js');
-var TodoModel = require('app/models/todo-item.js');
+},{"models/state.js":2,"models/todo-list.js":4}],8:[function(require,module,exports){
+var todoCollection = require('models/todo-list.js');
+var TodoModel = require('models/todo-item.js');
 
 module.exports = Backbone.View.extend({
   el: '[data-view="header"]',
@@ -170,7 +170,7 @@ module.exports = Backbone.View.extend({
   }
 });
 
-},{"app/models/todo-item.js":3,"app/models/todo-list.js":4}],9:[function(require,module,exports){
+},{"models/todo-item.js":3,"models/todo-list.js":4}],9:[function(require,module,exports){
 module.exports = Backbone.View.extend({
   tagName: 'li',
 
@@ -201,9 +201,9 @@ module.exports = Backbone.View.extend({
 });
 
 },{}],10:[function(require,module,exports){
-var todoCollection = require('app/models/todo-list.js');
-var state = require('app/models/state.js');
-var TodoView = require('app/views/todo-item.js');
+var todoCollection = require('models/todo-list.js');
+var state = require('models/state.js');
+var TodoView = require('views/todo-item.js');
 
 module.exports = Backbone.View.extend({
   el: '[data-view="todo-list"]',
@@ -278,4 +278,4 @@ module.exports = Backbone.View.extend({
   }
 });
 
-},{"app/models/state.js":2,"app/models/todo-list.js":4,"app/views/todo-item.js":9}]},{},[1]);
+},{"models/state.js":2,"models/todo-list.js":4,"views/todo-item.js":9}]},{},[1]);
