@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Template • TodoMVC</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <section class="todoapp" data-view="app">
+      <form action="#" class="header" data-view="header">
+        <h1>todos</h1>
+        <input class="new-todo js-input" placeholder="What needs to be done?" autofocus>
+      </form>
+      <section class="main" data-view="todo-list">
+        <input class="toggle-all js-toggle-all" type="checkbox">
+        <ul class="todo-list js-container"></ul>
+      </section>
+      <footer class="footer" data-view="footer"></footer>
+    </section>
+
+    <script type="text/html" id="tmpl-todo-item">
+      <div class="view <%= completed ? 'completed' : '' %> <%= hidden ? 'hidden' : '' %>">
+        <input class="toggle js-toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+        <label><%- title %></label>
+        <button class="destroy"></button>
+      </div>
+      <input class="edit" value="<%- title %>">
+    </script>
+    <script type="text/html" id="tmpl-footer">
+      <span class="todo-count">
+        <strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left
+      </span>
+      <ul class="filters">
+        <li><a class="<%= filter === 'all' ? 'selected' : '' %>" href="#/filter/all">All</a></li>
+        <li><a class="<%= filter === 'active' ? 'selected' : '' %>" href="#/filter/active">Active</a></li>
+        <li><a class="<%= filter === 'completed' ? 'selected' : '' %>" href="#/filter/completed">Completed</a></li>
+      </ul>
+      <% if (completed) { %>
+        <button class="clear-completed js-clear-completed">Clear completed</button>
+      <% } %>
+    </script>
+
+    <script src="https://yastatic.net/underscore/1.8.3/underscore-min.js"></script>
+    <script src="https://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://yastatic.net/backbone/1.2.3/backbone-min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

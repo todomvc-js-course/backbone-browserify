@@ -1,0 +1,22 @@
+{
+  "private": true,
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "express": "^4.13.4",
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.0",
+    "browserify": "^13.0.0",
+    "browserify-compile-templates": "^0.2.0",
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-watch": "^4.3.5",
+    "jstify": "^0.14.0",
+    "stringify": "^5.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
