@@ -7,12 +7,12 @@ var TodoModel = Backbone.Model.extend({
 
   urlRoot: '/api/todos/',
 
-  toggle: function () {
-    var isCompleted = this.get('completed');
+  toggle: function(completed) {
+    completed = completed || !this.get('completed');
 
-    this.set('completed', !isCompleted);
+    this.set('completed', completed);
     this.save({
-      completed: !isCompleted
+      completed: completed
     });
   }
 });

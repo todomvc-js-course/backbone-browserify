@@ -28,7 +28,7 @@ module.exports = Backbone.View.extend({
     });
 
     todoCollection.each(function(model) {
-      model.set('completed', !hasAllCompleted);
+      model.toggle(!hasAllCompleted);
     });
   },
 

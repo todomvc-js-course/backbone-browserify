@@ -8,11 +8,15 @@ var TodoCollection = Backbone.Collection.extend({
   comparator: 'title',
 
   completed: function () {
-    return this.where({completed: true});
+    return this.where({
+      completed: true
+    });
   },
 
   remaining: function () {
-    return this.where({completed: false});
+    return this.where({
+      completed: false
+    });
   },
 
   nextOrder: function () {

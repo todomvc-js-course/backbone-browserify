@@ -27,12 +27,12 @@ var TodoModel = Backbone.Model.extend({
 
   urlRoot: '/api/todos/',
 
-  toggle: function () {
-    var isCompleted = this.get('completed');
+  toggle: function(completed) {
+    completed = completed || !this.get('completed');
 
-    this.set('completed', !isCompleted);
+    this.set('completed', completed);
     this.save({
-      completed: !isCompleted
+      completed: completed
     });
   }
 });
@@ -50,11 +50,15 @@ var TodoCollection = Backbone.Collection.extend({
   comparator: 'title',
 
   completed: function () {
-    return this.where({completed: true});
+    return this.where({
+      completed: true
+    });
   },
 
   remaining: function () {
-    return this.where({completed: false});
+    return this.where({
+      completed: false
+    });
   },
 
   nextOrder: function () {
@@ -231,7 +235,7 @@ module.exports = Backbone.View.extend({
     });
 
     todoCollection.each(function(model) {
-      model.set('completed', !hasAllCompleted);
+      model.toggle(!hasAllCompleted);
     });
   },
 
