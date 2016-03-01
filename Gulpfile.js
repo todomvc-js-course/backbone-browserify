@@ -1,11 +1,10 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
-var jstify = require('jstify');
 var source = require('vinyl-source-stream');
 
-gulp.task('js', function() {
+gulp.task('build', function() {
   return browserify({
-      entries: ['app/app.js'],
+      entries: ['client/app.js'],
       debug: false
     })
     .bundle()
@@ -13,6 +12,6 @@ gulp.task('js', function() {
     .pipe(gulp.dest('public/js'));
 });
 
-gulp.task('default', function() {
-  gulp.watch('app/**/*.js', ['js']);
+gulp.task('watch', function() {
+  gulp.watch('client/**/*.js', ['build']);
 });
