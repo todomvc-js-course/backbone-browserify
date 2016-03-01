@@ -13,7 +13,6 @@ module.exports = Backbone.View.extend({
   initialize: function() {
     this.listenTo(todoCollection, 'add', this.render);
     this.listenTo(todoCollection, 'update', this.render);
-    this.listenTo(todoCollection, 'reset', this.render);
     this.listenTo(todoCollection, 'change:completed', this.render);
     this.listenTo(state, 'change:filter', this.render);
   },
