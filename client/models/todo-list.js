@@ -45,6 +45,11 @@ var TodoCollection = Backbone.Collection.extend({
     this.each(function(model) {
       model.setCompleted(!hasAllCompleted);
     });
+  },
+
+  addTodo: function(model) {
+    model.save();
+    this.add(model);
   }
 });
 

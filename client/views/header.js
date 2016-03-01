@@ -18,12 +18,14 @@ module.exports = Backbone.View.extend({
   },
 
   addTodo: function(title) {
-    var model = new TodoModel({
-      title: title,
+    if (!title) {
+      return;
+    }
+    var data = {
+      title: title.trim(),
       completed: false
-    });
-    model.save();
-    todoCollection.add(model);
+    };
+    todoCollection.addTodo(new TodoModel(data));
     this.$input.val('');
   }
 });
