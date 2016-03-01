@@ -6,6 +6,9 @@
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.0"
   },
+  "scripts": {
+    "start": "node server/index.js"
+  },
   "devDependencies": {
     "body-parser": "^1.15.0",
     "browserify": "^13.0.0",

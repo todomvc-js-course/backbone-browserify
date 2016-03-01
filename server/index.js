@@ -1,7 +1,12 @@
+var fs = require('fs');
+var path = require('path');
+
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var fakeDB = require('./fake-database.js');
+
+var defaultData = JSON.parse(fs.readFileSync(path.join(__dirname, 'todos.json'), 'utf-8'));
+var fakeDB = new (require('./fake-database.js'))(defaultData);
 
 app.use(bodyParser.json());
 
@@ -29,5 +34,5 @@ app['delete']('/api/todos/:id', function(req, res) {
   res.send();
 });
 
-app.use(express.static('public'));
+app.use(express.static(path.join(process.cwd(), 'public')));
 app.listen(3000);
