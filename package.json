@@ -8,8 +8,7 @@
     "body-parser": "^1.15.0"
   },
   "scripts": {
-    "dev": "gulp watch && node server/index.js",
-    "start": "gulp build && node server/index.js"
+    "start": "node server/index.js | gulp"
   },
   "devDependencies": {
     "browserify": "^13.0.0",

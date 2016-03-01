@@ -35,4 +35,6 @@ app['delete']('/api/todos/:id', function(req, res) {
 });
 
 app.use(express.static(path.join(process.cwd(), 'public')));
-app.listen(3000);
+app.listen(3000, function() {
+  console.log('dev server is running');
+});
